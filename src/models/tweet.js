@@ -17,7 +17,13 @@ const tweetSchema = new mongoose.Schema({
             }
         ]
     },{
-        timestamps:true,
+        timestamps: true,
+        toJSON: { virtuals: true },
+        toObject: { virtuals: true }
+        });
+
+    tweetSchema.virtual('contentWithEmail').get(function () {
+    return `${this.content} - ${this.userEmail}`;
     });
 
 

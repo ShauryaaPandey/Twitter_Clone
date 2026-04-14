@@ -48,6 +48,15 @@ class tweetRepository {
         }
     }
 
+    async getAll(offset , limit){
+        try {
+            const tweet = await Tweet.find().skip(offset).limit(limit).populate('comments');
+            return tweet;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
 }
 
 module.exports = tweetRepository;
