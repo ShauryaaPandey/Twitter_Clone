@@ -21,8 +21,11 @@ app.listen(3000, async ()=> {
     // const tweets = await Tweet.find();
     // console.log(tweets);
     const tweetRepo = new TweetRepository();
-    const tweet = await tweetRepo.getAll(1,4);
-    tweet.forEach(t => {
-        console.log(t.contentWithEmail);
-    });
+    // const tweet = await tweetRepo.getAll(1,4);
+    // tweet.forEach(t => {
+    //     console.log(t.contentWithEmail);
+    // });
+
+    // const tweet = await tweetRepo.create({content: 'With hooks' , userEmail: 'abc@123.com'});
+    // console.log(tweet);
 });
