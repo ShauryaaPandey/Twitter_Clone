@@ -5,30 +5,17 @@ const tweetSchema = new mongoose.Schema({
         content : {
             type: String,
             required : true,
+            max : [250,'Tweet cannot be more than 250 characters'],
         } , 
-        userEmail: {
-            type : String
-        },
-        comments : [
+        hashtags : [
             {
-                //will be storing the object ID
-             type : mongoose.Schema.Types.ObjectId,
-             ref : 'Comment'
+                type : mongoose.Schema.Types.ObjectId,
+                ref : 'Hashtag',
             }
         ]
-    },{
-        timestamps: true,
+        },{
+            timestamps: true,
         });
-
-    tweetSchema.virtual('contentWithEmail').get(function () {
-    return `${this.content} - ${this.userEmail}`;
-    });
-
-
-    //hook --> pre
-    tweetSchema.pre('save', async function () {
-    console.log('inside a hook');
-});
 
 
 //then make new model/object based on the schema 
