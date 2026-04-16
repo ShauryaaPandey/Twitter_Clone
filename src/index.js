@@ -1,10 +1,10 @@
-const express = require('express');
-const connect = require('./config/database');
-const TweetRepository = require('./repository/tweet-repo');
-const HashtagRepository = require('./repository/hashtag-repo');
-const tweetservice = require('./services/tweet-services');
-const Comment = require('./models/comments');
-const Tweet = require('./models/tweet');
+import express from 'express';
+import connect from './config/database.js';
+import TweetRepository from './repository/tweet-repo.js';
+import HashtagRepository from './repository/hashtag-repo.js';
+import TweetService from './services/tweet-services.js';
+import Comment from './models/comments.js';
+import Tweet from './models/tweet.js';
 
 const app = express();
 
@@ -14,9 +14,9 @@ app.listen(3000, async ()=> {
     console.log('Mongo db connected');
     let hashrepo = new HashtagRepository();
     let tweetRepo = new TweetRepository();
-    let service = new tweetservice();
+    let service = new TweetService();
 
-    const tweet = await service.create({content : '#caREer development #FaMous in #pyTHon and I am going to become #software #engineer'});
+    const tweet = await service.create({content : 'Done with refactoring'});
     console.log(tweet);
 
 });

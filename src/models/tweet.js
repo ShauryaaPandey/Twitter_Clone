@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 //First define the schema / structure 
 const tweetSchema = new mongoose.Schema({
@@ -20,4 +20,4 @@ const tweetSchema = new mongoose.Schema({
 
 //then make new model/object based on the schema 
 const Tweet = mongoose.model('Tweet',tweetSchema);
-module.exports = Tweet;
+export default Tweet;
