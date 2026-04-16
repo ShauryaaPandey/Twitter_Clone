@@ -54,6 +54,7 @@ class TweetService {
 
     } catch (error) {
         console.log("Something went wrong in the service");
+        console.log(error);
         throw error;
         }
     }
