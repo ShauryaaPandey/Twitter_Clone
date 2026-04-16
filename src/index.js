@@ -16,7 +16,7 @@ app.listen(3000, async ()=> {
     let tweetRepo = new TweetRepository();
     let service = new TweetService();
 
-    const tweet = await service.create({content : 'Done with refactoring'});
+    const tweet = await service.create({content : 'removed #array from the #TWEET schema'});
     console.log(tweet);
 
 });
