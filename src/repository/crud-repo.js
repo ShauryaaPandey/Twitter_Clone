@@ -1,52 +1,57 @@
-class CrudRepository{
-    constructor(model){
-        this.model = model; 
+class CrudRepository {
+    constructor(model) {
+        this.model = model;
     }
 
-    async create(data){
+    async create(data) {
         try {
-           const result = await this.model.create(data);
-           return result; 
+            return await this.model.create(data);
+        } catch (error) {
+
+            if (error.code === 11000) {
+                console.log("Already exists (duplicate entry)");
+            } else {
+                console.log("Something went wrong in the repo layer");
+            }
+
+            throw error;
+        }
+    }
+
+    async destroy(id) {
+        try {
+            return await this.model.findByIdAndDelete(id);
         } catch (error) {
             console.log("Something went wrong in the repo layer");
             throw error;
         }
     }
 
-    async destroy(id){
+    async get(id) {
         try {
-            const resp = await this.model.findByIdAndDelete(id);
-            return resp;
+            return await this.model.findById(id);   
         } catch (error) {
             console.log("Something went wrong in the repo layer");
             throw error;
         }
     }
 
-    async get(id){
+    async getAll(offset = 0, limit = 10) {
         try {
-            const resp = await this.model.findByIdAndDelete(id);
-            return resp;
+            return await this.model.find().skip(offset).limit(limit);
         } catch (error) {
             console.log("Something went wrong in the repo layer");
             throw error;
         }
     }
 
-    async getAll(id){
+    async update(id, data) {
         try {
-            const resp = await this.model.find({});
-            return resp;
-        } catch (error) {
-            console.log("Something went wrong in the repo layer");
-            throw error;
-        }
-    }
-
-    async update(id,data){
-        try {
-            const result = await this.model.findByIdAndUpdate(id,data , {new:true});
-            return result;
+            return await this.model.findByIdAndUpdate(
+                id,
+                data,
+                { returnDocument: 'after' } 
+            );
         } catch (error) {
             console.log("Something went wrong in the repo layer");
             throw error;

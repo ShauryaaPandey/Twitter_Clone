@@ -1,5 +1,6 @@
 import Tweet from '../models/tweet.js';
 import CrudRepository from './crud-repo.js';
+import Comment from '../models/comments.js'; // 
 
 
 class tweetRepository extends CrudRepository {
