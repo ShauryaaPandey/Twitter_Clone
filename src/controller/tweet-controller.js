@@ -21,4 +21,27 @@ export const createTweet = async(req,res) => {
     }
 }
 
-export default createTweet;
+export const getTweet = async(req,res) => {
+    try {
+        const response = await tweetservice.get(req.params.id);
+        return res.status(200).json({
+            succes : true,
+            message : 'Successfully fetched a Tweet',
+            data : response,
+            err : {}
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            succes : false,
+            message : 'Failed to fetch a Tweet',
+            data : [],
+            err : error
+        });
+    }
+}
+
+export default {
+    createTweet,
+    getTweet,
+};

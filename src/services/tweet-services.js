@@ -32,7 +32,6 @@ class TweetService {
             tag => !alreadyPresentTagsSet.has(tag.toLowerCase())
         );
 
-        // ✅ create new hashtags
         const newTagDocs = newtags.map(tag => ({
             title: tag,
             tweets: [tweet._id]
@@ -42,7 +41,6 @@ class TweetService {
             await this.hashRepo.bulkCreate(newTagDocs);
         }
 
-        // ✅ update existing hashtags
         if (alreadyPresentTags.length > 0) {
             await this.hashRepo.updateMany(
                 { title: { $in: alreadyPresentTags } },
@@ -56,6 +54,17 @@ class TweetService {
         console.log("Something went wrong in the service");
         console.log(error);
         throw error;
+        }
+    }
+
+    async get(tweetId) {
+        try {
+            const tweet = await this.tweetRepo.getWithComments(tweetId);
+            return tweet;
+        } catch (error) {
+            console.log("Something went wrong in the service");
+            console.log(error);
+            throw error;
         }
     }
 }
