@@ -9,7 +9,7 @@ import { signUp, login } from '../../controller/auth-controller.js';
 import { authenticate } from '../../middleware/authenticate.js';
 
 
-router.post('/tweets',authenticate,createTweet);
+router.post('/tweets',createTweet);
 router.post('/likes/toggle',toggleLike);
 router.post('/comments',authenticate,createComment);
 router.get('/tweets/:id',getTweet);
