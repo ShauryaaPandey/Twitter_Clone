@@ -26,4 +26,23 @@ const signUp = async (req, res) => {
         }
 }
 
-export default signUp;
+const login = async (req, res) => {
+    try {
+        const token  = await userService.login(req.body);
+        return res.status(200).json({
+            succes : true,
+            message : 'Successfully logged in',
+            data : token,
+            err : {}
+        });
+    } catch (error) {
+        return res.status(500).json({
+            succes : false,
+            message : 'Failed to login',
+            data : [],
+            err : error
+        });
+    }
+}
+
+export { signUp, login };
